@@ -18,7 +18,7 @@
 
 # Libraries
 *.lib
-*.a
+libmy.a
 *.la
 *.lo
 

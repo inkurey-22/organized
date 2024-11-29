@@ -61,8 +61,7 @@ SRC 	=   io/my_putnbr.c                   \
             lists/free_list.c                \
             lists/remove.c                   \
             lists/reverse.c                  \
-            lists/size.c                     \
-            lists/sort.c
+            lists/size.c
 
 CC 	    =   gcc
 

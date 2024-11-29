@@ -15,7 +15,7 @@ NAME   =    organized
 
 CC     =    gcc
 
-CFLAGS =    -W -Wall -Wextra -Iinclude -Llib -lmy -lshell -g
+CFLAGS =    -Iinclude -Llib -lmy -lshell -g
 
 OBJ    =    $(SRC:.c=.o)
 

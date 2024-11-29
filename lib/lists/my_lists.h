@@ -33,7 +33,6 @@ list_t *find_node(list_t *, void *,
 
 int list_size(list_t **);
 
-void merge_sort(list_t **, int (*cmp)(void const *, void const *));
 void add_to_top(list_t **, void *);
 void append_node(list_t **, void *);
 void free_list(list_t **, void (*free_data)(void *));

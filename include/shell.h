@@ -14,6 +14,10 @@ typedef struct device_s {
     int id;
 } device_t;
 
+typedef struct sort_crit {
+    int (*cmp)(void const *data1, void const *data2);
+} sort_crit_t;
+
 // To be implemented
 int add(void *data, char **args);
 int del(void *data, char **args);
