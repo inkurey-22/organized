@@ -5,6 +5,8 @@
 ** add node
 */
 
+#include <stddef.h>
+
 #include "my_strings.h"
 #include "my_lists.h"
 #include "my_printf.h"
@@ -32,6 +34,8 @@ int add(void *data, char **args)
     list_t **tmp = data;
 
     for (int i = 0; args[i] != NULL; i += 2){
+        if (args[i] == NULL || args[i + 1] == NULL)
+            return 84;
         dev = malloc(sizeof(device_t));
         if (dev == NULL)
             return 84;

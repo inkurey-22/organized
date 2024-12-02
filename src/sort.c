@@ -5,9 +5,10 @@
 ** sort
 */
 
-#include "my_strings.h"
+#include <stddef.h>
 
 #include "my_lists.h"
+#include "my_strings.h"
 
 #include "shell.h"
 
