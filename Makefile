@@ -25,6 +25,9 @@ $(NAME):	$(OBJ)
 	make -C lib
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS)
 
+run:	all
+	./$(NAME)
+
 clean:
 	rm -f $(OBJ)
 	make clean -C lib
