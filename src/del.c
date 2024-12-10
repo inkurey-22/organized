@@ -17,7 +17,7 @@ void free_device(void *data)
 {
     device_t *device = (device_t *)data;
 
-    my_printf("%s n°%d - \"%s\" deleted\n", device->type, device->id,
+    my_printf("%s n°%d - \"%s\" deleted.\n", device->type, device->id,
         device->name);
     free(device->name);
     free(device->type);
