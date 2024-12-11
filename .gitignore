@@ -36,6 +36,7 @@ libmy.a
 *.x86_64
 *.hex
 organized
+organized_bonus
 
 # Debug files
 *.dSYM/
