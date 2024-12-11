@@ -56,3 +56,7 @@ dkms.conf
 # IDE files
 .idea
 .vscode
+
+# Test files
+test_*
+*.txt
