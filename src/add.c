@@ -28,13 +28,27 @@ int find_id(list_t **data)
     return id;
 }
 
+int check_args(char **args, int i)
+{
+    if (args[i] == NULL || args[i + 1] == NULL)
+        return 84;
+    if (my_strcmp(args[i], "\"\"") == 0 || my_strcmp(args[i + 1], "\"\"") == 0)
+        return 84;
+    if (my_strcmp(args[i], "WIRE") != 0 && my_strcmp(args[i], "ACTUATOR") != 0
+        && my_strcmp(args[i], "DEVICE") != 0 &&
+        my_strcmp(args[i], "PROCESSOR") != 0 &&
+        my_strcmp(args[i], "SENSOR") != 0)
+        return 84;
+    return 0;
+}
+
 int add(void *data, char **args)
 {
     device_t *dev = NULL;
     list_t **tmp = data;
 
     for (int i = 0; args[i] != NULL; i += 2){
-        if (args[i] == NULL || args[i + 1] == NULL)
+        if (check_args(args, i) == 84)
             return 84;
         dev = malloc(sizeof(device_t));
         if (dev == NULL)

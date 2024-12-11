@@ -123,7 +123,8 @@ int sort(void *data, char **args)
         if (my_strcmp(args[i], "NAME") == 0)
             crits[i].cmp = &compare_by_name;
         if (my_strcmp(args[i], "TYPE") != 0 && my_strcmp(args[i], "ID") != 0
-            && my_strcmp(args[i], "NAME") != 0)
+            && my_strcmp(args[i], "NAME") != 0 &&
+            my_strcmp(args[i], "-r") != 0)
             return 84;
     }
     merge_sort(list, crits, crits_nb);
