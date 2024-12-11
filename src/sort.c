@@ -20,30 +20,6 @@ int my_tablen(char **tab)
     return i;
 }
 
-static int compare_by_type(void const *data1, void const *data2)
-{
-    device_t *device1 = (device_t *)data1;
-    device_t *device2 = (device_t *)data2;
-
-    return my_strcmp(device1->type, device2->type);
-}
-
-static int compare_by_id(void const *data1, void const *data2)
-{
-    device_t *device1 = (device_t *)data1;
-    device_t *device2 = (device_t *)data2;
-
-    return (device1->id - device2->id);
-}
-
-static int compare_by_name(void const *data1, void const *data2)
-{
-    device_t *device1 = (device_t *)data1;
-    device_t *device2 = (device_t *)data2;
-
-    return my_strcmp(device1->name, device2->name);
-}
-
 static int multi_criteria_cmp(void const *data1, void const *data2,
     sort_crit_t *criteria, int criteria_count)
 {
@@ -51,6 +27,9 @@ static int multi_criteria_cmp(void const *data1, void const *data2,
 
     for (int i = 0; i < criteria_count; i++) {
         result = criteria[i].cmp(data1, data2);
+        if (criteria[i].reverse) {
+            result = -result;
+        }
         if (result != 0) {
             return result;
         }
@@ -108,26 +87,56 @@ void merge_sort(list_t **list, sort_crit_t *criteria, int criteria_count)
     *list = sorted_merge(a, b, criteria, criteria_count);
 }
 
+static void setup_criteria(int *crit_index, sort_crit_t *crits,
+    int (*cmp)(void const *, void const *))
+{
+    crits[*crit_index].cmp = cmp;
+    crits[*crit_index].reverse = 0;
+    *crit_index += 1;
+}
+
+static int parse_criteria(char **args, sort_crit_t *crits, int crits_nb)
+{
+    int crit_index = 0;
+
+    for (int i = 0; i < crits_nb; i++) {
+        if (my_strcmp(args[i], "TYPE") == 0)
+            setup_criteria(&crit_index, crits, &compare_by_type);
+        if (my_strcmp(args[i], "ID") == 0)
+            setup_criteria(&crit_index, crits, &compare_by_id);
+        if (my_strcmp(args[i], "NAME") == 0)
+            setup_criteria(&crit_index, crits, &compare_by_name);
+        if (my_strcmp(args[i], "-r") == 0 && crit_index > 0)
+            crits[crit_index - 1].reverse = 1;
+    }
+    return crit_index;
+}
+
+static int check_crits(char **args)
+{
+    for (int i = 0; args[i]; i++) {
+        if (my_strcmp(args[i], "TYPE") == 0
+            || my_strcmp(args[i], "ID") == 0
+            || my_strcmp(args[i], "NAME") == 0
+            || my_strcmp(args[i], "-r") == 0)
+            continue;
+        return 84;
+    }
+    return 0;
+}
+
 int sort(void *data, char **args)
 {
     list_t **list = (list_t **)data;
     int crits_nb = my_tablen(args);
     sort_crit_t crits[crits_nb];
-    int reverse = 0;
+    int crit_index = parse_criteria(args, crits, crits_nb);
 
-    for (int i = 0; i < crits_nb; i++) {
-        if (my_strcmp(args[i], "TYPE") == 0)
-            crits[i].cmp = &compare_by_type;
-        if (my_strcmp(args[i], "ID") == 0)
-            crits[i].cmp = &compare_by_id;
-        if (my_strcmp(args[i], "NAME") == 0)
-            crits[i].cmp = &compare_by_name;
-        if (my_strcmp(args[i], "TYPE") != 0 && my_strcmp(args[i], "ID") != 0
-            && my_strcmp(args[i], "NAME") != 0 &&
-            my_strcmp(args[i], "-r") != 0)
-            return 84;
+    if (check_crits(args) == 84)
+        return 84;
+    if (crit_index == 84) {
+        return 84;
     }
-    merge_sort(list, crits, crits_nb);
-    if (reverse)
-        *list = reverse_list(*list);
+    merge_sort(list, crits, crit_index);
+    return 0;
 }

@@ -9,13 +9,15 @@ SRC    =    src/main.c	\
 			src/add.c	\
    			src/del.c	\
    			src/disp.c	\
-   			src/sort.c
+   			src/sort.c  \
+   			src/compare.c
 
 BONUS_SRC = src/main.c	\
    			src/add.c	\
    			bonus/del_bonus.c	\
    			src/disp.c	\
-   			src/sort.c
+   			src/sort.c	\
+   			src/compare.c
 
 NAME   =    organized
 BONUS_NAME = organized_bonus

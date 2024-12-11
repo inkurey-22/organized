@@ -14,9 +14,15 @@ typedef struct device_s {
     int id;
 } device_t;
 
-typedef struct sort_crit {
-    int (*cmp)(void const *data1, void const *data2);
+typedef struct sort_crit_s {
+    int (*cmp)(void const *, void const *);
+    int reverse;
 } sort_crit_t;
+
+// Custom functions
+int compare_by_type(void const *data1, void const *data2);
+int compare_by_id(void const *data1, void const *data2);
+int compare_by_name(void const *data1, void const *data2);
 
 // To be implemented
 int add(void *data, char **args);
