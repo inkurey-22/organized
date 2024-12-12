@@ -66,6 +66,8 @@ int del(void *data, char **args)
     int ref = 0;
     int status = 0;
 
+    if (args[0] == NULL)
+        return 84;
     for (int i = 0; args[i] != NULL; i++) {
         if (args[i] == NULL || my_str_isnum(args[i]) == 0)
             return 84;

@@ -114,6 +114,8 @@ static int parse_criteria(char **args, sort_crit_t *crits, int crits_nb)
 
 static int check_crits(char **args)
 {
+    if (args[0] == NULL)
+        return 84;
     for (int i = 0; args[i]; i++) {
         if (my_strcmp(args[i], "TYPE") == 0
             || my_strcmp(args[i], "ID") == 0
@@ -134,9 +136,8 @@ int sort(void *data, char **args)
 
     if (check_crits(args) == 84)
         return 84;
-    if (crit_index == 84) {
+    if (crit_index == 0)
         return 84;
-    }
     merge_sort(list, crits, crit_index);
     return 0;
 }

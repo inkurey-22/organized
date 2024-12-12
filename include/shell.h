@@ -23,6 +23,7 @@ typedef struct sort_crit_s {
 int compare_by_type(void const *data1, void const *data2);
 int compare_by_id(void const *data1, void const *data2);
 int compare_by_name(void const *data1, void const *data2);
+int my_tablen(char **tab);
 
 // To be implemented
 int add(void *data, char **args);

@@ -47,6 +47,8 @@ int add(void *data, char **args)
     device_t *dev = NULL;
     list_t **tmp = data;
 
+    if (args[0] == NULL)
+        return 84;
     for (int i = 0; args[i] != NULL; i += 2){
         if (check_args(args, i) == 84)
             return 84;
@@ -55,10 +57,7 @@ int add(void *data, char **args)
             return 84;
         dev->type = my_strdup(args[i]);
         dev->name = my_strdup(args[i + 1]);
-        if (*tmp == NULL)
-            dev->id = 0;
-        else
-            dev->id = find_id(data) + 1;
+        dev->id = (*tmp == NULL) ? 0 : find_id(data) + 1;
         add_to_top(data, dev);
         my_printf("%s n°%i - \"%s\" added.\n", dev->type, dev->id, dev->name);
     }
