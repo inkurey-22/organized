@@ -20,8 +20,13 @@ int parse_range(const char *arg, int *start, int *end)
 
     if (dash == NULL)
         return 0;
-    *start = my_getnbr(arg);
+    *start = my_getnbr(arg + 1);
     *end = my_getnbr(dash + 1);
+    if (*start > *end) {
+        int temp = *start;
+        *start = *end;
+        *end = temp;
+    }
     return 1;
 }
 
@@ -85,8 +90,8 @@ int del_range_nodes(void *data, int start, int end)
 {
     int status = 0;
 
-    for (int j = start + 1; j <= end; j++) {
-        del_node((list_t **)data, j, &status);
+    for (int j = start; j <= end; j++) {
+      del_node((list_t **)data, j, &status);
         if (status == 0)
             return 84;
     }
