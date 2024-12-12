@@ -22,6 +22,8 @@ char *my_strncpy(char *, char const *, int n);
 char *my_revstr(char *);
 char *my_strstr(char *, char const *);
 char *my_strdup(char const *);
+char *my_strchr(char *, char);
+char *my_strrchr(char *, char);
 char **split_string(char const *, char const *);
 
 // String Case Functions
@@ -35,5 +37,8 @@ int my_str_islower(char const *);
 int my_str_isnum(char const *);
 int my_str_isprintable(char const *);
 int my_str_isupper(char const *);
+
+// Character properties
+int my_isnum(char c);
 
 #endif /* !MY_STRINGS_H_ */

@@ -16,7 +16,7 @@
 
 int parse_range(const char *arg, int *start, int *end)
 {
-    char *dash = strchr(arg, '-');
+    char *dash = my_strchr(arg, '-');
 
     if (dash == NULL)
         return 0;
