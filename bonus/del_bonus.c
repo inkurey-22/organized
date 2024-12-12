@@ -109,6 +109,8 @@ int handle_argument(void *data, const char *arg)
 
 int del(void *data, char **args)
 {
+    if (args[0] == NULL)
+        return 84;
     for (int i = 0; args[i] != NULL; i++)
         if (handle_argument(data, args[i]) == 84)
             return 84;
