@@ -42,3 +42,14 @@ Available criteria are :
 - NAME
 Each criteria can be assigned the -r flag to reverse the sorting order.
 Again, any unknown criteria will trigger an error and exit the program with code 84.
+
+# Bonus
+
+The bonus version of the project adds a new feature to the del command.
+Instead of being able to delete elements one by one, you can give it a range
+
+Example :
+```bash
+del [1-3]
+```
+This will delete elements 1, 2 and 3 from the list.
